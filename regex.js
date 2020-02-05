@@ -20,18 +20,18 @@ var rules = [
   Rule('R', [NT('A')]),
   Rule('A', [T('('), NT('U'), T(')')]), // atom
   Rule('A', [NT('L')]),
-  // Rule('I', [NT('D')]), // int
-  // Rule('I', [NT('I'), NT('D')]),
-  // Rule('D', [T('0')]),
-  // Rule('D', [T('1')]),
-  // Rule('D', [T('2')]),
-  // Rule('D', [T('3')]),
-  // Rule('D', [T('4')]),
-  // Rule('D', [T('5')]),
-  // Rule('D', [T('6')]),
-  // Rule('D', [T('7')]),
-  // Rule('D', [T('8')]),
-  // Rule('D', [T('9')]),
+  Rule('I', [NT('D')]), // int
+  Rule('I', [NT('I'), NT('D')]),
+  Rule('D', [T('0')]),
+  Rule('D', [T('1')]),
+  Rule('D', [T('2')]),
+  Rule('D', [T('3')]),
+  Rule('D', [T('4')]),
+  Rule('D', [T('5')]),
+  Rule('D', [T('6')]),
+  Rule('D', [T('7')]),
+  Rule('D', [T('8')]),
+  Rule('D', [T('9')]),
 ];
 
 function ruleNamer(rule) { // strictly speaking, this could be folded in to to_NFA, but it's nice to make a readable AST.
@@ -49,7 +49,7 @@ function ruleNamer(rule) { // strictly speaking, this could be folded in to to_N
     case 8:
       return 'Star';
     case 9:
-      return 'EmptyUnion';//Plus
+      return 'EmptyUnion';//'Plus'
     case 10:
       return 'Repetition';
     case 12:
@@ -70,7 +70,7 @@ function parse(regex, alphabet) {
 }
 
 function guessAlphabet(regex) { //removed the removal of numbers from alphabet
-  return regex.replace(/[\|\*\+\^\?\(\)]/g, '').split('').filter(function(c,i,s){return s.indexOf(c)===i;}).sort();
+  return regex.replace(/[\|\*\+\^\?\(\)0-9]/g, '').split('').filter(function(c,i,s){return s.indexOf(c)===i;}).sort();
 }
 
 function to_NFA(regex, alphabet) {
@@ -94,7 +94,7 @@ function to_NFA(regex, alphabet) {
       case 'Star':
         return reduce(tree.children[0]).star();
       case 'Plus':
-        return reduce(tree.children[0]).union(reduce(tree.children[1])); // Changed this to be the same as union 
+        return reduce(tree.children[0]).plus();
       case 'Repetition':
         return reduce(tree.children[0]).repeat(parseInt(reduceDigits(tree.children[1])));
       case 'Paren':
