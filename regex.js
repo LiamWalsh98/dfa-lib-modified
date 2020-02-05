@@ -20,18 +20,18 @@ var rules = [
   Rule('R', [NT('A')]),
   Rule('A', [T('('), NT('U'), T(')')]), // atom
   Rule('A', [NT('L')]),
-  Rule('I', [NT('D')]), // int
-  Rule('I', [NT('I'), NT('D')]),
-  Rule('D', [T('0')]),
-  Rule('D', [T('1')]),
-  Rule('D', [T('2')]),
-  Rule('D', [T('3')]),
-  Rule('D', [T('4')]),
-  Rule('D', [T('5')]),
-  Rule('D', [T('6')]),
-  Rule('D', [T('7')]),
-  Rule('D', [T('8')]),
-  Rule('D', [T('9')]),
+  // Rule('I', [NT('D')]), // int
+  // Rule('I', [NT('I'), NT('D')]),
+  // Rule('D', [T('0')]),
+  // Rule('D', [T('1')]),
+  // Rule('D', [T('2')]),
+  // Rule('D', [T('3')]),
+  // Rule('D', [T('4')]),
+  // Rule('D', [T('5')]),
+  // Rule('D', [T('6')]),
+  // Rule('D', [T('7')]),
+  // Rule('D', [T('8')]),
+  // Rule('D', [T('9')]),
 ];
 
 function ruleNamer(rule) { // strictly speaking, this could be folded in to to_NFA, but it's nice to make a readable AST.
