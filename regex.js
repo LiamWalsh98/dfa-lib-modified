@@ -49,7 +49,7 @@ function ruleNamer(rule) { // strictly speaking, this could be folded in to to_N
     case 8:
       return 'Star';
     case 9:
-      return 'Concatenation';//'Plus'
+      return 'Plus';//'Plus'
     case 10:
       return 'Repetition';
     case 12:
