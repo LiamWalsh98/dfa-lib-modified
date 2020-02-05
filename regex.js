@@ -69,8 +69,8 @@ function parse(regex, alphabet) {
   return astPrinter(res[0], true, true, ruleNamer);
 }
 
-function guessAlphabet(regex) {
-  return regex.replace(/[\|\*\+\^\?\(\)0-9]/g, '').split('').filter(function(c,i,s){return s.indexOf(c)===i;}).sort();
+function guessAlphabet(regex) { //removed the removal of numbers from alphabet
+  return regex.replace(/[\|\*\+\^\?\(\)]/g, '').split('').filter(function(c,i,s){return s.indexOf(c)===i;}).sort();
 }
 
 function to_NFA(regex, alphabet) {
@@ -94,7 +94,7 @@ function to_NFA(regex, alphabet) {
       case 'Star':
         return reduce(tree.children[0]).star();
       case 'Plus':
-        return reduce(tree.children[0]).plus();
+        return reduce(tree.children[0]).union(reduce(tree.children[1])); // Changed this to be the same as union 
       case 'Repetition':
         return reduce(tree.children[0]).repeat(parseInt(reduceDigits(tree.children[1])));
       case 'Paren':
