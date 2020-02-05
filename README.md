@@ -1,6 +1,5 @@
-#Originally created by Bakkot at https://github.com/bakkot/dfa-lib
-
-========
+Originally created by Bakkot at https://github.com/bakkot/dfa-lib
+===
 
 DFA-lib
 ==============
